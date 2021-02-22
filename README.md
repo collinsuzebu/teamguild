@@ -2,7 +2,7 @@
 
 Project management helps keep track of to-dos in a project.
 
-Demo: [Live URL](http://example.com)
+Demo: [Live URL](http://34.86.12.67:3000)
 
 ## Technology Stack:
 
@@ -94,7 +94,7 @@ REACT_APP_BACKEND_SERVER=http://localhost:5000
 
 ### Running with Docker;
 
-To run with docker, place the environment variables to point to the docker **HOST** machine. These variables are both present in .env and backend.env files.
+To run with docker, replace the environment variables to point to the docker **HOST** machine. These variables are both present in .env and backend.env files.
 
 `MONGO_DB_CONNECTION_STRING` variable should not be included when running with docker.
 This would allow docker use it's internal address to communicate with all containers present in the same network.
