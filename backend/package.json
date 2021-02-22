@@ -1,0 +1,84 @@
+{
+  "name": "project-manager-backend",
+  "version": "0.0.0",
+  "private": true,
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "src/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "scripts": {
+    "start": "npm run prod",
+    "dev": "nodemon --exec babel-node ./src/bin/www.js",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel ./src --out-dir dist --copy-files",
+    "prod": "node ./dist/bin/www.js",
+    "test": "jest --verbose --forceExit --watchAll --timeout=10000 --maxWorkers=1",
+    "test:watch": "jest --watch"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-transform-for-of"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "babel-jest": "^26.6.3",
+    "body-parser": "^1.19.0",
+    "clean-deep": "^3.4.0",
+    "cookie-parser": "~1.4.4",
+    "core-js": "^3.9.0",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.11.16",
+    "morgan": "~1.9.1",
+    "npm-run-all": "^4.1.5",
+    "regenerator-runtime": "^0.13.7",
+    "request": "^2.88.2",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.17",
+    "@babel/core": "^7.12.17",
+    "@babel/node": "^7.12.17",
+    "@babel/plugin-transform-runtime": "^7.12.15",
+    "@babel/preset-env": "^7.12.17",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
+  }
+}

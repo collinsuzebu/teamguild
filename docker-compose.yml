@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  backend:
+    env_file: "./backend/backend.env"
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/usr/src/app/
+    restart: always
+    depends_on:
+      - mongodb
+    networks:
+      - appnetwork
+  frontend:
+    env_file: "./frontend/.env"
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app/
+    restart: always
+    links:
+      - "backend:be"
+    networks:
+      - appnetwork
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - ./data-node:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --logpath=/dev/null
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    networks:
+      - appnetwork
+
+networks:
+  appnetwork:
+    driver: bridge
