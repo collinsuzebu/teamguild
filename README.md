@@ -2,7 +2,7 @@
 
 Project management helps keep track of to-dos in a project.
 
-Demo: [Live URL](http://example.com)
+Demo: [Live URL](http://34.86.12.67:3000)
 
 ## Technology Stack:
 
