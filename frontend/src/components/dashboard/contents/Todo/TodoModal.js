@@ -15,7 +15,7 @@ const TodoModal = ({
   return (
     <div>
       <Modal isOpen={modal} fade={false} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{`${edit ? "Edit" : "Add"} Todo for "${
+        <ModalHeader toggle={toggle}>{`${edit ? "Edit" : "Add"} Task for "${
           project.title
         }"`}</ModalHeader>
         <ModalBody>
@@ -66,7 +66,7 @@ const TodoModal = ({
               toggle();
             }}
           >
-            {edit ? "Edit Todo" : "Add Todo"}
+            {edit ? "Edit Task" : "Add Task"}
           </Button>
           <Button color="secondary" onClick={toggle}>
             Cancel

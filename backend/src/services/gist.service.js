@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class GenerateProjectMarkdown {
+class ProjectMarkdown {
   constructor(projectName, todos) {
     this.projectName = projectName;
     this.todos = todos;
@@ -79,4 +79,4 @@ const postGist = async (gist, token) => {
     });
 };
 
-export { GenerateProjectMarkdown, postGist };
+export { ProjectMarkdown, postGist };

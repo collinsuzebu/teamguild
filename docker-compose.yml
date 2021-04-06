@@ -1,6 +1,18 @@
 version: "3"
 
 services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    restart: always
+    networks:
+      - appnetwork
   backend:
     env_file: "./backend/backend.env"
     build:

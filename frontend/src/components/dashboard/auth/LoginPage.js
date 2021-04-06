@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Button, Container } from "reactstrap";
+import { Button, Container, Spinner } from "reactstrap";
 import { BACKEND_SERVER } from "../../../../src/config";
 
 function LoginPage() {
@@ -17,7 +17,7 @@ function LoginPage() {
 
   const handleClick = () => {
     setLoading(true);
-    window.location.assign(BACKEND_SERVER);
+    window.location.assign(`${BACKEND_SERVER}/`);
   };
 
   return (
@@ -28,8 +28,9 @@ function LoginPage() {
         </h1>
         <p>Authorization with github is required</p>
 
-        <Button active={loading} onClick={handleClick}>
-          <i className="fa fa-github"></i> LOGIN WITH GITHUB
+        <Button disabled={loading} onClick={handleClick}>
+          <i className="fa fa-github"></i> LOGIN WITH GITHUB{" "}
+          {loading ? <Spinner size="sm" color="primary" /> : null}
         </Button>
       </div>
     </Container>

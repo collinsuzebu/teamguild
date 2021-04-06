@@ -1,7 +1,6 @@
-// import dotenv from "dotenv";
-
-// dotenv.config({ path: `${__dirname}/../frontend.env` });
+const NGINX_PREFIX = "/api";
 
 export const SCOPE = process.env.REACT_APP_SCOPE || "gist";
 export const BACKEND_SERVER =
-  process.env.REACT_APP_BACKEND_SERVER || "http://localhost:5000";
+  process.env.REACT_APP_BACKEND_SERVER + NGINX_PREFIX ||
+  "http://localhost" + NGINX_PREFIX;

@@ -17,6 +17,8 @@ export const REFRESH_COOKIE_DURATION =
 
 export const SESSION_TOKEN_NAME = process.env.SESSION_TOKEN_NAME || "token";
 
+export const SESSION_AUTH_NAME = "is_authenticated";
+
 export const DB_NAME = process.env.DB_NAME || "projectManager";
 
 export const MONGO_DB_CONNECTION_STRING =
@@ -33,6 +35,8 @@ export const IV_PLAIN = "2~4KaQDww5Z7zN:4";
  * E.g. .example.com
  */
 export const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN || "localhost";
+
+export const COOKIE_PATH = "/";
 
 export const GITHUB_APP_ID = process.env.GITHUB_APP_ID || "";
 export const GITHUB_APP_SECRET = process.env.GITHUB_APP_SECRET || "";

@@ -15,8 +15,6 @@ export function projectReducer(state = initialState.projects, action) {
       return state.filter((project) => project._id !== action.project._id);
     case types.LOAD_PROJECTS:
       return action.projects;
-    case types.EXPORT_PROJECT:
-      return state;
     default:
       return state;
   }

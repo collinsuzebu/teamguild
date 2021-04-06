@@ -4,6 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 
 function RequireAuth({ component: Component, ...opts }) {
   const user = useSelector((state) => state.user);
+  localStorage.setItem("current", opts.location.pathname);
   return (
     <Route
       {...opts}
@@ -11,7 +12,9 @@ function RequireAuth({ component: Component, ...opts }) {
         user.isAuthenticated === true ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/" />
+          <Redirect
+            to={{ pathname: "/", state: { from: opts.location.pathname } }}
+          />
         )
       }
     />

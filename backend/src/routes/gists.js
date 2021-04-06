@@ -4,7 +4,7 @@ import { Todo } from "../models/Todo";
 import { Project } from "../models/Project";
 import { AuthMiddleware } from "../auth/auth.middleware";
 import { getUserToken } from "../services/user.service";
-import { GenerateProjectMarkdown, postGist } from "../services/gist.service";
+import { ProjectMarkdown, postGist } from "../services/gist.service";
 
 const router = express.Router();
 
@@ -35,7 +35,7 @@ router.post("/export/:id", AuthMiddleware, async (req, res) => {
 
   const userToken = await getUserToken(req.user);
 
-  const g = new GenerateProjectMarkdown(proj.title, { pending, completed });
+  const g = new ProjectMarkdown(proj.title, { pending, completed });
   const projectMarkdown = g.generate();
 
   var gist = {
@@ -47,7 +47,7 @@ router.post("/export/:id", AuthMiddleware, async (req, res) => {
       },
     },
   };
-  const posted = postGist(gist, userToken);
+  const posted = await postGist(gist, userToken);
 
   return res.json(posted);
 });

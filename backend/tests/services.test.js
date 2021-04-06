@@ -1,5 +1,5 @@
 import { User } from "../src/models/User";
-import { GenerateProjectMarkdown } from "../src/services/gist.service";
+import { ProjectMarkdown } from "../src/services/gist.service";
 import { getUserToken } from "../src/services/user.service";
 import { decryptText } from "../src/utils";
 
@@ -7,15 +7,15 @@ jest.mock("../src/utils");
 
 describe("Gist Service", () => {
   it("Ensure we have class", () => {
-    const newService = new GenerateProjectMarkdown("project_name", {
+    const newService = new ProjectMarkdown("project_name", {
       completed: [],
       pending: [],
     });
-    expect(newService).toBeInstanceOf(GenerateProjectMarkdown);
+    expect(newService).toBeInstanceOf(ProjectMarkdown);
   });
 
   it("Ensures that <generate()> returns string only", () => {
-    const newService = new GenerateProjectMarkdown("project_name", {
+    const newService = new ProjectMarkdown("project_name", {
       completed: [],
       pending: [],
     });

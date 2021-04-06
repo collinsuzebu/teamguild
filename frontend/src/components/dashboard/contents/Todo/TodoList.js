@@ -5,7 +5,7 @@ export function TodoList({ todos, edit, onDelete }) {
   return (
     todos.length > 0 && (
       <>
-        <div className="header">All Todos for this project.</div>
+        <div className="header">All Tasks for this project.</div>
         <Table borderless>
           <thead>
             <tr>

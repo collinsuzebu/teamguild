@@ -1,6 +1,4 @@
-import axios from "axios";
 import axiosInstance from "./axios-instance";
-import { BACKEND_SERVER } from "../config";
 
 export const getTodos = (projectId) => {
   return axiosInstance.get(`/todos/${projectId}`).then((response) => {

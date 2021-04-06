@@ -29,7 +29,7 @@ export function ProjectForm({ project, saving, onSave, handleChange, errors }) {
       <div className="center-button-content">
         <Button active={true} disabled={saving} onClick={onSave}>
           {saving ? "Saving..." : "Save Changes"}{" "}
-          {saving ? <Spinner size="sm" type="grow" color="dark" /> : null}
+          {saving ? <Spinner size="sm" color="dark" /> : null}
         </Button>
       </div>
     </Form>

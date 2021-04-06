@@ -50,13 +50,26 @@ GITHUB_SECRET=
 
 In github application interface set the following fields as;
 
-`Homepage URL` = http://localhost:5000/
+`Homepage URL` = http://localhost:3000/
 
 `Authorization callback URL` = http://localhost:5000/login/oauth2/github
+
+If running with `Docker`,
+
+`Homepage URL` = http://localhost
+
+`Authorization callback URL` = http://localhost:5000/api/login/oauth2/github
+
+The `/api` prefix is for routing in nginx.
 
 Create or rename the file `backend.sample.env` > `backend.env`
 
 ### To run the application locally without docker, you must have mongodb installed;
+
+You'd need to map localhost to a different address in other for cookie domain to work.
+E.g localhost > localhost.mysite:3000 localhost.mysite:5000
+
+So replace any instance of localhost in this doc to your new mapped localhost address.
 
 ##### Configure the `/backend/backend.env` file.
 
@@ -68,7 +81,7 @@ Add the following variables
 
 FRONTEND_URL=http://localhost:3000
 
-MONGO_DB_CONNECTION_STRING=`mongodb://localhost:27017/projectManager
+MONGO_DB_CONNECTION_STRING=mongodb://localhost:27017/projectManager
 
 ```
 
@@ -92,7 +105,7 @@ REACT_APP_BACKEND_SERVER=http://localhost:5000
 
 `npm start`
 
-### Running with Docker;
+## Running with Docker;
 
 To run with docker, replace the environment variables to point to the docker **HOST** machine. These variables are both present in .env and backend.env files.
 
@@ -101,8 +114,11 @@ This would allow docker use it's internal address to communicate with all contai
 `COOKIE_DOMAIN` must be the domain name.
 E.g `44.44.44.44`. If not specified, it uses `localhost`.
 
-```
+**UPDATE** The project uses `nginx` to serve react static files and also to proxy request. The 3 environment variable listed below should be the same. `No port` is required.
 
+`NGINX_PREFIX="/api"` in config.js
+
+```
 FRONTEND_URL
 COOKIE_DOMAIN
 REACT_APP_BACKEND_SERVER

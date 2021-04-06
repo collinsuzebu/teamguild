@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button, ButtonGroup, Row, Container, Col, Spinner } from "reactstrap";
+import {
+  Button,
+  ButtonGroup,
+  Row,
+  Container,
+  Col,
+  Spinner,
+  Tooltip,
+} from "reactstrap";
 import { TopNav } from "../../TopNav/TopNav";
 import { ProjectForm } from "./ProjectForm";
 import { toast } from "react-toastify";
@@ -22,6 +30,7 @@ import {
   saveTodo,
   deleteTodo,
 } from "../../../../redux/actions/todo";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export function ManageProject() {
   // set up default
@@ -31,7 +40,8 @@ export function ManageProject() {
   const [saving, setSaving] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [editTodo, setEditTodo] = useState(false);
-  const loading = useSelector((state) => state.apiCallInProgress > 0);
+  const [gistLink, setGistLink] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   const [modal, setModal] = useState({
     deleteProject: false,
     addTodo: false,
@@ -42,6 +52,7 @@ export function ManageProject() {
 
   // select states from store
   const projects = useSelector((state) => state.projects);
+  const exportedProj = useSelector((state) => state.projectExported);
   const todos = useSelector((state) =>
     Object.keys(state.todos).length > 0 ? state.todos[project._id] : []
   );
@@ -78,6 +89,8 @@ export function ManageProject() {
     setModal({ ...modal, addTodo: !modal.addTodo });
   };
 
+  const toggleToolTip = () => setTooltipOpen(!tooltipOpen);
+
   // useEffect to pull data from api and save to store
   useEffect(() => {
     //   only fetch new data from server if current state is empty
@@ -95,6 +108,12 @@ export function ManageProject() {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (exportedProj) {
+      setGistLink(exportedProj);
+    }
+  }, [exportedProj]);
 
   const onExport = (e) => {
     setExporting(true);
@@ -206,23 +225,27 @@ export function ManageProject() {
               </Col>
               <Col>
                 <ButtonGroup className="mb-2 mt-2 float-right">
-                  <Button
-                    size="sm"
-                    color={"primary"}
-                    active={true}
-                    onClick={toggleAddModal}
+                  <CopyToClipboard
+                    text={gistLink}
+                    onCopy={() => {
+                      toast("Copied");
+                    }}
                   >
-                    Add Todo
+                    <Button disabled={gistLink ? false : true}>
+                      <i id="tooltipId_1" className="fa fa-copy fa-xs"></i>
+                    </Button>
+                  </CopyToClipboard>
+
+                  <Button size="sm" color={"primary"} onClick={toggleAddModal}>
+                    Add Task
                   </Button>
                   <Button
                     size="sm"
-                    disabled={loading}
+                    disabled={exporting}
                     onClick={() => onExport()}
                   >
                     {exporting ? "Exporting " : "Export Project"}{" "}
-                    {exporting ? (
-                      <Spinner size="sm" type="grow" color="dark" />
-                    ) : null}
+                    {exporting ? <Spinner size="sm" color="dark" /> : null}
                   </Button>
                   <Button
                     color={"danger"}
@@ -250,6 +273,14 @@ export function ManageProject() {
                 </ButtonGroup>
               </Col>
             </Row>
+            <Tooltip
+              placement="top"
+              isOpen={tooltipOpen}
+              target="tooltipId_1"
+              toggle={toggleToolTip}
+            >
+              Copy link to recently exported gist.
+            </Tooltip>
             <ProjectForm
               project={project}
               onSave={onSave}

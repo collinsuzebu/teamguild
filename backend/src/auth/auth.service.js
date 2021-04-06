@@ -9,8 +9,10 @@ import { encryptText } from "../utils";
 import {
   IS_LOCAL,
   COOKIE_DOMAIN,
+  COOKIE_PATH,
   REFRESH_COOKIE_DURATION,
   SESSION_TOKEN_NAME,
+  SESSION_AUTH_NAME,
   GITHUB_APP_ID,
   GITHUB_APP_SECRET,
   SIGNING_KEY,
@@ -51,7 +53,14 @@ export class AuthService {
 
   logout(context) {
     context.req.session.destroy();
-    context.res.clearCookie(SESSION_TOKEN_NAME);
+    context.res.clearCookie(SESSION_TOKEN_NAME, {
+      domain: COOKIE_DOMAIN,
+      path: COOKIE_PATH,
+    });
+    context.res.clearCookie(SESSION_AUTH_NAME, {
+      domain: COOKIE_DOMAIN,
+      path: COOKIE_PATH,
+    });
     return null;
   }
 
@@ -93,22 +102,19 @@ export class AuthService {
 
     if (user) {
       const query = { githubId: githubUser.id };
+
       const update = {
-        $push: {
-          ...cleanDeep({
-            ...{
-              ...githubUser,
-              // Fields to not overwrite
-              name:
-                get(user, "name", null) ||
-                get(githubUser, "name", get(githubUser, "login", null)),
-            },
-            avatar: githubUser.avatar_url,
-            token: encryptText(token),
-          }),
-        },
+        ...githubUser,
+        // Fields to not overwrite
+        name:
+          get(user, "name", null) ||
+          get(githubUser, "name", get(githubUser, "login", null)),
+
+        avatar: githubUser.avatar_url,
+        token: encryptText(token),
       };
-      await user.updateOne(query, update);
+
+      await this.userModel.updateOne(query, update);
     }
 
     if (!user) {
@@ -138,11 +144,18 @@ export class AuthService {
       user: { _id: user._id, name: user.name },
     });
 
-    context.res.cookie("token", tokenSession, {
+    context.res.cookie(SESSION_TOKEN_NAME, tokenSession, {
       maxAge: REFRESH_COOKIE_DURATION,
       domain: COOKIE_DOMAIN,
       httpOnly: true,
       secure: !IS_LOCAL,
+    });
+
+    context.res.cookie(SESSION_AUTH_NAME, true, {
+      maxAge: REFRESH_COOKIE_DURATION,
+      domain: COOKIE_DOMAIN,
+      secure: !IS_LOCAL,
+      path: COOKIE_PATH,
     });
 
     return user;

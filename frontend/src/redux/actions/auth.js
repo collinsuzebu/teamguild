@@ -17,10 +17,12 @@ export const getUser = () => (dispatch) => {
 };
 
 export const logoutUser = (history) => (dispatch) => {
-  // remove cookies
+  // clear local storage
+  window.localStorage.clear();
+
   AuthApi.logoutUser().then((res) => {
     dispatch({ type: types.SET_CURRENT_USER, user: {} });
   });
 
-  history.push("/dashboard");
+  history.push("/");
 };
