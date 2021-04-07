@@ -18,10 +18,6 @@ import projectsRouter from "./routes/projects";
 
 const app = express();
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-
 // cors options
 const corsOpt = {
   origin: FRONTEND_URL,

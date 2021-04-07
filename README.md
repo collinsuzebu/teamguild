@@ -152,3 +152,6 @@ cd /frontend
 npm run test
 
 ```
+
+nano backend/backend.env
+nano frontend/.env
