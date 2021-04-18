@@ -23,9 +23,7 @@ function LoginPage() {
   return (
     <Container>
       <div className="jumbotron text-center text-primary">
-        <h1>
-          <span className="fa fa-github"></span> GITHUB OAUTH LOGIN
-        </h1>
+        <h1>TEAM GUILD LOGIN</h1>
         <p>Authorization with github is required</p>
 
         <Button disabled={loading} onClick={handleClick}>

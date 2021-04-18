@@ -34,9 +34,7 @@ const TopNav = () => {
       <Navbar light expand="md" className="mb-5 top-nav">
         <Container>
           <NavbarBrand tag={Link} className="brand-header" to="/dashboard">
-            {/* <Link to="/dashboard" className="nav-top-item"> */}
-            ProjectManager<span className="brand-header-sub"></span>
-            {/* </Link> */}
+            TeamGuild<span className="brand-header-sub"></span>
           </NavbarBrand>
 
           <NavbarToggler onClick={toggle} />

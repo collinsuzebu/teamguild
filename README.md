@@ -81,7 +81,7 @@ Add the following variables
 
 FRONTEND_URL=http://localhost:3000
 
-MONGO_DB_CONNECTION_STRING=mongodb://localhost:27017/projectManager
+MONGO_DB_CONNECTION_STRING=mongodb://localhost:27017/teamGuild
 
 ```
 

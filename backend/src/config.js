@@ -19,7 +19,7 @@ export const SESSION_TOKEN_NAME = process.env.SESSION_TOKEN_NAME || "token";
 
 export const SESSION_AUTH_NAME = "is_authenticated";
 
-export const DB_NAME = process.env.DB_NAME || "projectManager";
+export const DB_NAME = process.env.DB_NAME || "teamGuild";
 
 export const MONGO_DB_CONNECTION_STRING =
   process.env.MONGO_DB_CONNECTION_STRING ||

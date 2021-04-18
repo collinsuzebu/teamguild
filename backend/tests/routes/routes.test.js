@@ -10,7 +10,7 @@ jest.mock("../../src/auth/auth.middleware");
 let app;
 
 beforeEach((done) => {
-  mongoose.connect("mongodb://localhost:27017/projectManagerTest", {
+  mongoose.connect("mongodb://localhost:27017/teamGuildTest", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }),
