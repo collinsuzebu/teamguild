@@ -41,7 +41,7 @@ function LoginPage() {
           <div className={"text-center"}>
             <Button disabled={loading} onClick={handleClick}>
               <i className="fa fa-github"></i> LOGIN WITH GITHUB{" "}
-              {loading ? <Spinner size="sm" color="danger" /> : null}
+              {loading ? <Spinner size="sm" color="secondary" /> : null}
             </Button>
             <p className={"text-muted"}>
               Authorization with github is required.
