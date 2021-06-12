@@ -1,8 +1,8 @@
-## Project Management
+## Team Guild
 
-Project management helps keep track of to-dos in a project.
+Team Guild is an online project management tool enabling remote workers and freelancers to increase productivity.
+The one place to track everything.
 
-Demo: [Live URL](http://34.86.12.67:3000)
 
 ## Technology Stack:
 
